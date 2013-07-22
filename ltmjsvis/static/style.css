@@ -1,0 +1,28 @@
+body {
+    background-color: #111111;
+}
+
+circle, rect { 
+    fill: #444444;
+    fill-opacity: .25;
+    stroke: #ffffff;
+    stroke-width: 1px;
+}
+
+.leaf circle {
+    fill: #666699;
+    fill-opacity: 1;
+}
+
+.MONITOR_STATUS_UP circle {
+    fill: #66cc66;
+}
+
+.MONITOR_STATUS_DOWN circle {
+    fill: #cc6666;
+}
+
+text {
+    font: 10px sans-serif;
+    fill: #ffffff;
+}
