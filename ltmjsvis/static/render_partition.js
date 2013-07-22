@@ -37,7 +37,30 @@ function render_partition(error, root){
         .attr("r", function(d) { return d.r; });
 }
 
-d3.json("./<one_of_your_environments>/<one_of_your_partitions>.json", render_partition);
+function populate_controls(error, root){
+    var select = document.getElementById("target");
+
+    for(var eidx = 0; eidx < root.environments.length; eidx++){
+        var env = root.environments[eidx];
+        var env_name = env.name;
+        for(var pidx = 0; pidx < env.partitions.length; pidx++){
+            var partition = env.partitions[pidx]
+            console.log(env_name + "#" + partition);
+
+            var option = document.createElement("option");
+            option.value = env_name + "/" + partition;
+            option.text = env_name + "/" + partition;
+            select.appendChild(option);
+        }
+    }
+}
+
+function get_and_render_partition(){
+    var select= document.getElementById("target");
+    var target = select.value;
+    d3.json("./" + target + ".json", render_partition);
+}
 
 d3.select(self.frameElement).style("height", diameter + "px");
+d3.json("/env.json", populate_controls);
 
