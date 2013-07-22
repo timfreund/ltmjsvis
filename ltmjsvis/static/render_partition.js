@@ -1,25 +1,27 @@
 var diameter = 900;
 var format = d3.format(",d");
 
-var pack = d3.layout.pack()
-    .size([diameter - 4, diameter - 4])
-    .value(function(d) { 
-        if(d.stats == null){
-            return 0;
-        } else if(d.stats.STATISTIC_SERVER_SIDE_MAXIMUM_CONNECTIONS.low == 0){
-            return 0.5;
-        } else {
-            return d.stats.STATISTIC_SERVER_SIDE_MAXIMUM_CONNECTIONS.low;
-        }
-    });
-
 var svg = d3.select("body").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
     .append("g")
     .attr("transform", "translate(2, 2)");
 
+var rendering_statistic = "STATISTIC_SERVER_SIDE_MAXIMUM_CONNECTIONS";
+
 function render_partition(error, root){
+    var pack = d3.layout.pack()
+        .size([diameter - 4, diameter - 4])
+        .value(function(d) { 
+            if(d.stats == null){
+                return 0;
+            } else if(d.stats[rendering_statistic].low == 0){
+                return 0.5;
+            } else {
+                return d.stats[rendering_statistic].low;
+            }
+        });
+
     var node = svg.datum(root).selectAll(".node")
         .data(pack.nodes)
         .enter().append("g")
@@ -29,7 +31,7 @@ function render_partition(error, root){
         .attr("transform", function(d) { 
             return "translate(" + d.x + "," + d.y + ")"; 
         });
-    
+
     node.append("title")
         .text(function(d) { return d.name + (d.children ? "" : ": " + format(d.size)); });
     
@@ -56,7 +58,8 @@ function populate_controls(error, root){
 }
 
 function get_and_render_partition(){
-    var select= document.getElementById("target");
+    rendering_statistic = document.getElementById("statistic").value;
+    var select = document.getElementById("target");
     var target = select.value;
     d3.json("./" + target + ".json", render_partition);
 }
