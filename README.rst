@@ -9,10 +9,18 @@ pools with the help of the following tools:
 - Flask
 - D3.js
 
-Right now it's barely functional in that you'll need to hard code 
-an environment and partition value in render_partition.js to see 
-anything on screen.  It'll get better quickly, and there's enough
-here to warrant a copy some place other than my hard drive. 
+Run the following:
+
+    python setup.py develop
+    ltmjsvis
+
+And you'll see flask running on port 5000.  Go to
+http://localhost:5000 and pick an environment and partition from the
+select box that you'd like to render.
+
+Then pick another environment and partition and see that rendering a
+second partition is broken until someone writes code to clear the
+canvas in between renderings.  
 
 Annoyed with the app?  Ask for help: @timfreund on twitter or
 timfreund on Freenode.
