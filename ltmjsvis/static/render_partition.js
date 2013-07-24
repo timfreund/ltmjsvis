@@ -1,7 +1,7 @@
 var diameter = 900;
 var format = d3.format(",d");
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#svgcontainer").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
     .append("g")
@@ -33,10 +33,24 @@ function render_partition(error, root){
         });
 
     node.append("title")
-        .text(function(d) { return d.name + (d.children ? "" : ": " + format(d.size)); });
+        .text(function(d) { if (d.name != null){
+            return d.name + (d.children ? "" : ": " + format(d.size));
+        } else if (d.address != null){
+            return d.address;
+        }});
     
     node.append("circle")
-        .attr("r", function(d) { return d.r; });
+        .attr("r", function(d) { return d.r; })
+        .attr("onmouseover", function(d) { 
+            if (d.name != null){
+                return "display_details('" + d.name + "');";
+            } else if (d.address != null){
+                return "display_details('" + d.address + "');";
+            }});
+}
+
+function display_details(id){
+    document.getElementById("nodename").innerText = id;
 }
 
 function populate_controls(error, root){

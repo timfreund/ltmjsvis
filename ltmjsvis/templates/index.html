@@ -15,7 +15,7 @@
         <option value="STATISTIC_SERVER_SIDE_PACKETS_IN">SERVER_SIDE_PACKETS_IN</option>
         <option value="STATISTIC_SERVER_SIDE_PACKETS_OUT">SERVER_SIDE_PACKETS_OUT</option>
         <option value="STATISTIC_SERVER_SIDE_CURRENT_CONNECTIONS">SERVER_SIDE_CURRENT_CONNECTIONS</option>
-        <option value="STATISTIC_SERVER_SIDE_MAXIMUM_CONNECTIONS">SERVER_SIDE_MAXIMUM_CONNECTIONS</option>
+        <option selected="selected" value="STATISTIC_SERVER_SIDE_MAXIMUM_CONNECTIONS">SERVER_SIDE_MAXIMUM_CONNECTIONS</option>
         <option value="STATISTIC_SERVER_SIDE_TOTAL_CONNECTIONS">SERVER_SIDE_TOTAL_CONNECTIONS</option>
         <option value="STATISTIC_PVA_SERVER_SIDE_BYTES_IN">PVA_SERVER_SIDE_BYTES_IN</option>
         <option value="STATISTIC_PVA_SERVER_SIDE_BYTES_OUT">PVA_SERVER_SIDE_BYTES_OUT</option>
@@ -30,7 +30,12 @@
       </select>
       <input type="button" value="Render selection" onclick="get_and_render_partition();"/>
     </form>
+    <div id="details">
+      <span id="nodename"></span>
+    </div>
+    <div id="svgcontainer">
 
+    </div>
   </body>
   <script src="/static/render_partition.js"></script>
 </html>
